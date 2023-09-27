@@ -1,0 +1,67 @@
+<div class="card rounded shadow-sm p-3">
+
+  <div class="d-flex">
+    <div class="flex-fill pr-3">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text">Filtro: </div>
+        </div>
+        <input type="text"
+        class="form-control"
+        placeholder=""
+        >
+      </div>
+    </div>
+    <div>
+      <a class="d-flex btn btn-outline-primary" routerLink="/pokemon/detalhe">
+        <i class="fa fa-plus-circle my-1"></i>
+        <b class="ml-1 d-none d-sm-block">
+          Novo
+        </b>
+      </a>
+    </div>
+  </div>
+
+
+  <table class="table tabel-striped table-hover">
+    <thead class="table-dark">
+      <tr class="text-center">
+        <th>Nome</th>
+        <th class="d-none d-md-table-cell">Descricao</th>
+        <th>Tipo</th>
+        <th>Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center" *ngFor="let pokemon of pokemons">
+        <td class="border text-wrap">{{pokemon.name}}</td>
+        <td class="border text-wrap">{{pokemon.description}}</td>
+        <td class="border">{{pokemon.type}}</td>
+        <td>
+          <button type="button" class="btn btn-danger btn-sm me-2" (click)="openModal($event, template, pokemon.id)">
+            Excluir
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="detailPokemon(pokemon.id)">
+            Editar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="!pokemons.length">
+      <tr>
+        <td colspan="4" class="text-center">
+          <h4>Nenhum pokemon cadastrado</h4>
+        </td>
+      </tr>
+    </tfoot>
+
+  </table>
+</div>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Tem certeza que quer deletar esse animal?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>
